@@ -1,11 +1,11 @@
+"use client"; 
+import { use } from 'react';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import friends from "../../../friends.json";
 import { HiMiniBellSnooze } from "react-icons/hi2";
 import { AiFillDelete } from "react-icons/ai";
 import { FaBoxArchive } from "react-icons/fa6";
-import Image from "next/image";
-import  callimg from "../../../assets/img/call.png"
-import  textimg from "../../../assets/img/text.png"
-import  videoimg from "../../../assets/img/video.png"
 import { IoCallOutline } from "react-icons/io5";
 import { IoIosText } from "react-icons/io";
 import { FaVideo } from "react-icons/fa";
@@ -27,17 +27,35 @@ const statusLabel = {
 
 
 
-const FriendDetailPage =async ({ params }) => {
+const FriendDetailPage = ({ params }) => {
+ const { id } = use (params)
+ const friend = friends.find((f) => String(f.id) === String(id));;
+const addToTimeline = (type) => {
+    const entry = {
+      id: crypto.randomUUID(),
+      name: friend.name,
+      action: type,
+      timestamp: new Date().toLocaleString()
+    };
+    const existingTimeline = JSON.parse(localStorage.getItem("timeline") || "[]");
+    existingTimeline.unshift(entry);
+    localStorage.setItem("timeline", JSON.stringify(existingTimeline));
+  
+    toast.success(`${type} with ${friend.name}!`);
+  }
 
 
-  const { id } = await params;
 
-  const friend = friends.find((f) => String(f.id) === String(id));
+
+ 
+
+  
 
   if (!friend) return <div className="p-6 text-red-500">Friend not found.</div>;
 
   return (
     <div className=" py-20  flex gap-6 bg-base-300 justify-center">
+      
      <div id="laft-column" className="w-[400px] gap-10 ">
       
         <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-5 flex flex-col items-center text-center gap-3 hover:shadow-md transition-shadow duration-200">
@@ -103,17 +121,17 @@ const FriendDetailPage =async ({ params }) => {
   <div className="bg-white space-y-5 p-5 rounded-xl">
     <p className="text-green-800">Quick Check-In</p>
     <div className="flex gap-9 justify-center">
-     <button className="btn btn-base px-14 py-5">
+     <button onClick={() => addToTimeline("Call")} className="btn btn-base px-14 py-5">
       <IoCallOutline />
       
       Call
      </button>
-     <button className="btn btn-base px-14 py-5">
+     <button onClick={() => addToTimeline("Text")} className="btn btn-base px-14 py-5">
      <IoIosText />
       
       Text
      </button>
-     <button className="btn btn-base px-14 py-5">
+     <button onClick={() => addToTimeline("Video")} className="btn btn-base px-14 py-5">
       <FaVideo />
       
       Video
