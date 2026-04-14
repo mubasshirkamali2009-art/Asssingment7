@@ -11,9 +11,9 @@ export const metadata = {
 
 const  HomePage = () => {
     return (
-        <div>
-            <div className='mx-auto mt-30 content-center items-center text-center'>
-                <h1 className='text-black bg-white text-5xl py-5 text-center font-bold'>Friends to keep close in your life</h1>
+        <div className='bg-base-300'>
+            <div className='mx-auto mt-30 content-center bg-base-300 items-center text-center'>
+                <h1 className='text-black bg-base-300 text-5xl py-5 text-center font-bold'>Friends to keep close in your life</h1>
             <p className='text-center  text-gray-500 py-5 '>Your personal shelf of meaningful connections. <br /> Browse, tend, and nurture the
 relationships that matter most.</p>
 <button className='btn text-white bg-green-900 mx-auto content-center items-center'><IoAddCircleOutline />
@@ -23,19 +23,20 @@ Add Friend
 
             <div className='flex gap-10 p-10 mx-auto my-20 justify-center'>
                 
-                <div className='rounded-md bg-emerald-50 text-center text-black shadow-2xl p-8  font-bold'>
+                <div className='rounded-md bg-white
+                text-center text-black shadow-2xl p-8  font-bold'>
                     <h2>{friends.length}</h2>
                     <p className='text-gray-500'>Total friends</p>
                 </div>
-                <div className='rounded-md bg-emerald-50 text-center text-black shadow-2xl p-8 '>
+                <div className='rounded-md bg-white text-center text-black shadow-2xl p-8 font-bold '>
                     <h2>{friends.filter(f => f.status === 'on-track').length}</h2>
                     <p className='text-gray-500'>On Track</p>
                 </div>
-                <div className='rounded-md bg-emerald-50 text-center text-black shadow-2xl p-8 '>
+                <div className='rounded-md bg-white text-center text-black shadow-2xl p-8 font-bold'>
                     <h2>{friends.filter(f => f.status === 'overdue').length}</h2>
                     <p className='text-gray-500'>Need Attention</p>
                 </div>
-                <div className='rounded-md bg-emerald-50 text-center text-black shadow-2xl p-8 '>
+                <div className='rounded-md bg-white text-center text-black shadow-2xl p-8 font-bold'>
                     <h2>10</h2>
                     <p className='text-gray-500'>Interactions This Month</p>
                 </div>
