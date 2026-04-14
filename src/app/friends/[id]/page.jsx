@@ -6,6 +6,9 @@ import Image from "next/image";
 import  callimg from "../../../assets/img/call.png"
 import  textimg from "../../../assets/img/text.png"
 import  videoimg from "../../../assets/img/video.png"
+import { IoCallOutline } from "react-icons/io5";
+import { IoIosText } from "react-icons/io";
+import { FaVideo } from "react-icons/fa";
 
 
 
@@ -95,23 +98,26 @@ const FriendDetailPage =async ({ params }) => {
 <p className="text-green-800">Relationship Goal</p>
 <button className="btn btn--outline">Edit</button>
     </div>
-    Connect every <span className="font-extrabold">30 Days</span>
+    Connect every <span className="font-extrabold">{friend.goal}</span>
   </div>
   <div className="bg-white space-y-5 p-5 rounded-xl">
     <p className="text-green-800">Quick Check-In</p>
     <div className="flex gap-9 justify-center">
-      <div className="bg-base-300 w-[200px] text-center items-center flex flex-col justify-center rounded-xl p-3">
-        <Image src={callimg} />
-        <h1 className="text-2xl font bold ">Call</h1>
-      </div>
-      <div className="bg-base-300 w-[200px] text-center items-center flex flex-col justify-center rounded-xl p-3">
-        <Image src={textimg} />
-        <h1>Text</h1>
-      </div>
-      <div className="bg-base-300 w-[200px] text-center items-center flex flex-col justify-center rounded-xl p-3">
-        <Image src={videoimg} />
-        <h1>Video</h1>
-      </div>
+     <button className="btn btn-base px-14 py-5">
+      <IoCallOutline />
+      
+      Call
+     </button>
+     <button className="btn btn-base px-14 py-5">
+     <IoIosText />
+      
+      Text
+     </button>
+     <button className="btn btn-base px-14 py-5">
+      <FaVideo />
+      
+      Video
+     </button>
     </div>
   </div>
                 
