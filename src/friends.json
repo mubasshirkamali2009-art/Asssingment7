@@ -1,0 +1,98 @@
+[
+  {
+    "id": 1,
+    "name": "Aisha Rahman",
+    "picture": "https://randomuser.me/api/portraits/women/44.jpg",
+    "email": "aisha.rahman@gmail.com",
+    "days_since_contact": 18,
+    "status": "overdue",
+    "tags": ["college", "close friend"],
+    "bio": "Met during freshman orientation. She moved to Toronto after graduation and works as a UX designer. We used to pull all-nighters together before exams.",
+    "goal": 14,
+    "next_due_date": "2026-04-10"
+  },
+  {
+    "id": 2,
+    "name": "Marcus Thompson",
+    "picture": "https://randomuser.me/api/portraits/men/32.jpg",
+    "email": "marcus.t@outlook.com",
+    "days_since_contact": 5,
+    "status": "on-track",
+    "tags": ["work", "gym buddy"],
+    "bio": "We started at the same company the same week. Now we hit the gym every Tuesday. He got me into Brazilian jiu-jitsu last year.",
+    "goal": 7,
+    "next_due_date": "2026-04-18"
+  },
+  {
+    "id": 3,
+    "name": "Sofia Mendez",
+    "picture": "https://randomuser.me/api/portraits/women/68.jpg",
+    "email": "sofia.mendez@yahoo.com",
+    "days_since_contact": 29,
+    "status": "overdue",
+    "tags": ["childhood", "close friend"],
+    "bio": "We grew up on the same street and went to the same school from age 6 to 18. She lives in Madrid now and is raising two kids. Time zones make it hard.",
+    "goal": 21,
+    "next_due_date": "2026-04-05"
+  },
+  {
+    "id": 4,
+    "name": "Daniel Park",
+    "picture": "https://randomuser.me/api/portraits/men/76.jpg",
+    "email": "d.park.dev@gmail.com",
+    "days_since_contact": 11,
+    "status": "almost due",
+    "tags": ["tech", "college", "mentor"],
+    "bio": "Senior engineer I met at a hackathon. He mentored me through my first job search and we still geek out over side projects and new frameworks.",
+    "goal": 10,
+    "next_due_date": "2026-04-16"
+  },
+  {
+    "id": 5,
+    "name": "Priya Nair",
+    "picture": "https://randomuser.me/api/portraits/women/21.jpg",
+    "email": "priya.nair@protonmail.com",
+    "days_since_contact": 3,
+    "status": "on-track",
+    "tags": ["college", "travel buddy"],
+    "bio": "My roommate for two years in university. We've backpacked through Vietnam and Portugal together. She just started her MBA and we try to catch up weekly.",
+    "goal": 7,
+    "next_due_date": "2026-04-19"
+  },
+  {
+    "id": 6,
+    "name": "James Okafor",
+    "picture": "https://randomuser.me/api/portraits/men/12.jpg",
+    "email": "james.okafor@gmail.com",
+    "days_since_contact": 45,
+    "status": "overdue",
+    "tags": ["family friend", "old friend"],
+    "bio": "Our families have known each other for over 20 years. We drifted apart after he moved to Lagos for work. I keep meaning to schedule a proper video call.",
+    "goal": 30,
+    "next_due_date": "2026-03-30"
+  },
+  {
+    "id": 7,
+    "name": "Lena Fischer",
+    "picture": "https://randomuser.me/api/portraits/women/55.jpg",
+    "email": "lena.fischer@web.de",
+    "days_since_contact": 8,
+    "status": "almost due",
+    "tags": ["colleague", "book club"],
+    "bio": "We worked on the same product team for three years before she moved back to Berlin. We started a two-person book club during the pandemic and somehow kept it going.",
+    "goal": 14,
+    "next_due_date": "2026-04-17"
+  },
+  {
+    "id": 8,
+    "name": "Carlos Rivera",
+    "picture": "https://randomuser.me/api/portraits/men/58.jpg",
+    "email": "carlosrivera.photo@gmail.com",
+    "days_since_contact": 2,
+    "status": "on-track",
+    "tags": ["neighbor", "close friend"],
+    "bio": "Met when we both moved into the same apartment building. We grab coffee most weekends and collaborate on street photography projects. He taught me film photography.",
+    "goal": 7,
+    "next_due_date": "2026-04-20"
+  }
+]
