@@ -40,7 +40,8 @@ const addToTimeline = (type) => {
     const existingTimeline = JSON.parse(localStorage.getItem("timeline") || "[]");
     existingTimeline.unshift(entry);
     localStorage.setItem("timeline", JSON.stringify(existingTimeline));
-  
+    window.dispatchEvent(new Event("timelineUpdated"));
+    console.log("Saved to localStorage:", existingTimeline);
     toast.success(`${type} with ${friend.name}!`);
   }
 
