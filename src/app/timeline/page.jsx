@@ -6,8 +6,8 @@ import videoimg from "../../assets/img/video.png"
 import Image from "next/image";
 
 const icons = {
-  Call: <Image src={callimg} alt="call history"/>,
-  Text: <Image src={textimg} alt="text history"/>,
+  Call: <Image src={callimg} alt="call history" />,
+  Text: <Image src={textimg} alt="text history" />,
   Video: <Image src={videoimg} alt="video history" />,
 };
 
@@ -22,14 +22,14 @@ const filterOptions = ["All", "Call", "Text", "Video"];
 const TimelinePage = () => {
   const [allActivity, setAllActivity] = useState([]);
   const [selected, setSelected] = useState("All");
-    const [loading, setLoading] = useState(true); 
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const load = () => {
-              setLoading(true); 
+      setLoading(true);
       const saved = JSON.parse(localStorage.getItem("timeline") || "[]");
       setAllActivity(saved);
-           setTimeout(() => setLoading(false), 500);
+      setTimeout(() => setLoading(false), 500);
     };
 
     load();
@@ -41,22 +41,25 @@ const TimelinePage = () => {
   const visibleActivity = selected === "All"
     ? allActivity
     : allActivity.filter((item) => item.action === selected);
-const handleClearhistory =()=>{
-    localStorage.clear()
+
+  const handleClearhistory = () => {
+    localStorage.clear();
     setAllActivity([]);
-}
+  };
 
   return (
-    <div className="min-h-screen bg-base-300 py-20 px-6">
+    <div className="min-h-screen bg-base-300 py-10 md:py-20 px-4 md:px-6">
       <div className="max-w-3xl mx-auto w-full">
 
-        <h1 className="text-3xl font-bold text-gray-800 mb-6">Timeline</h1>
+        <h1 className="text-2xl md:text-3xl font-bold text-gray-800 mb-6 text-center md:text-left">
+          Timeline
+        </h1>
 
-        <div className="relative inline-block mb-8">
+        <div className="relative inline-block mb-8 w-full md:w-auto">
           <select
             value={selected}
             onChange={(e) => setSelected(e.target.value)}
-            className="appearance-none bg-white border border-gray-200 rounded-lg px-4 py-2 pr-9 text-sm text-gray-700 cursor-pointer focus:outline-none focus:border-gray-400 min-w-[160px]"
+            className="appearance-none bg-white border border-gray-200 rounded-lg px-4 py-2 pr-9 text-sm text-gray-700 cursor-pointer focus:outline-none focus:border-gray-400 w-full md:min-w-[160px]"
           >
             <option value="All">Filter timeline</option>
             {filterOptions.filter((o) => o !== "All").map((option) => (
@@ -67,22 +70,21 @@ const handleClearhistory =()=>{
             className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-gray-400"
             width="12" height="12" viewBox="0 0 12 12" fill="none"
           >
-            <path d="M2 4l4 4 4-4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+            <path d="M2 4l4 4 4-4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
           </svg>
         </div>
 
-        {
-        loading ? (
-  <div className="flex flex-col justify-center items-center py-20 gap-4">
-    <div className="relative w-16 h-16">
-      <div className="absolute inset-0 rounded-full border-4 border-gray-100"></div>
-      <div className="absolute inset-0 rounded-full border-4 border-transparent border-t-blue-400 border-r-purple-400 animate-spin"></div>
-      <div className="absolute inset-2 rounded-full border-4 border-transparent border-t-pink-400 border-r-blue-400 animate-spin" style={{ animationDirection: "reverse", animationDuration: "0.8s" }}></div>
-    </div>
-    <p className="text-gray-400 text-sm animate-pulse">Loading timeline...</p>
-  </div> )
-       : visibleActivity.length === 0 ? (
-          <div className="bg-white rounded-2xl p-12 text-center shadow-sm">
+        {loading ? (
+          <div className="flex flex-col justify-center items-center py-20 gap-4">
+            <div className="relative w-16 h-16">
+              <div className="absolute inset-0 rounded-full border-4 border-gray-100"></div>
+              <div className="absolute inset-0 rounded-full border-4 border-transparent border-t-blue-400 border-r-purple-400 animate-spin"></div>
+              <div className="absolute inset-2 rounded-full border-4 border-transparent border-t-pink-400 border-r-blue-400 animate-spin" style={{ animationDirection: "reverse", animationDuration: "0.8s" }}></div>
+            </div>
+            <p className="text-gray-400 text-sm animate-pulse">Loading timeline...</p>
+          </div>
+        ) : visibleActivity.length === 0 ? (
+          <div className="bg-white rounded-2xl p-8 md:p-12 text-center shadow-sm">
             <p className="text-gray-400 text-lg">No activity yet</p>
             <p className="text-gray-300 text-sm mt-2">Go check in with a friend!</p>
           </div>
@@ -91,31 +93,36 @@ const handleClearhistory =()=>{
             {visibleActivity.map((item) => (
               <div
                 key={item.id}
-                className="bg-white rounded-2xl shadow-sm border border-gray-100 p-5 flex items-center gap-5 hover:shadow-xl hover:scale-[1.15] transition-all duration-500 ease-in-out cursor-pointer w-full"
+                className="bg-white rounded-2xl shadow-sm border border-gray-100 p-4 md:p-5 flex items-center gap-3 md:gap-5 hover:shadow-xl sm:hover:scale-[1.02] md:hover:scale-[1.05] transition-all duration-300 ease-in-out cursor-pointer w-full"
               >
-                <div className={`w-12 h-12 rounded-full flex items-center justify-center ${colors[item.action]}`}>
-                  {icons[item.action]}
+                <div className={`w-10 h-10 md:w-12 md:h-12 rounded-full flex-shrink-0 flex items-center justify-center ${colors[item.action]}`}>
+                  <div className="w-6 h-6 md:w-8 md:h-8 flex items-center justify-center">
+                    {icons[item.action]}
+                  </div>
                 </div>
 
-                <div className="flex-1">
-                  <p className="text-gray-800 font-semibold">
+                <div className="flex-1 min-w-0">
+                  <p className="text-gray-800 font-semibold text-sm md:text-base truncate">
                     {item.action}
                     <span className="text-gray-400 font-normal"> with </span>
                     {item.name}
                   </p>
-                  <p className="text-gray-400 text-sm mt-0.5">{item.timestamp}</p>
+                  <p className="text-gray-400 text-xs md:text-sm mt-0.5">{item.timestamp}</p>
                 </div>
 
-                <span className={`text-xs font-semibold px-3 py-1 rounded-full ${colors[item.action]}`}>
+                <span className={`hidden sm:inline-block text-[10px] md:text-xs font-semibold px-2 md:px-3 py-1 rounded-full ${colors[item.action]}`}>
                   {item.action}
                 </span>
               </div>
-            ))} 
-            <button onClick={handleClearhistory} className="btn btn-warning">Clear history</button>
-          </div> 
-         
+            ))}
+            <div className="mt-6 flex justify-center md:justify-start">
+                <button onClick={handleClearhistory} className="btn btn-warning w-full md:w-auto">
+                    Clear history
+                </button>
+            </div>
+          </div>
         )}
-  
+
       </div>
     </div>
   );

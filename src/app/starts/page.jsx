@@ -42,19 +42,19 @@ const StartsPage = () => {
   }
 
   return (
-    <div className='flex flex-col items-center justify-center space-y-10 p-10 min-h-screen bg-base-300'>
+    <div className='flex flex-col items-center justify-center space-y-6 md:space-y-10 p-5 md:p-10 min-h-screen bg-base-300'>
       <div className='text-center'>
-        <h1 className='text-5xl text-black font-bold'>Friendship Analytics</h1>
-        <p className='text-gray-500 mt-2'>By Interaction Type</p>
+        <h1 className='text-3xl sm:text-4xl md:text-5xl text-black font-bold'>Friendship Analytics</h1>
+        <p className='text-gray-500 mt-2 text-sm md:text-base'>By Interaction Type</p>
       </div>
 
-      <div className="w-full max-w-[500px] h-[400px]">
+      <div className="w-full max-w-[500px] h-[300px] sm:h-[350px] md:h-[400px]">
         <ResponsiveContainer width="100%" height="100%">
           <PieChart>
             <Pie
               data={chartData}
-              innerRadius="70%"
-              outerRadius="90%"
+              innerRadius="65%"
+              outerRadius="85%"
               paddingAngle={5}
               dataKey="value"
               isAnimationActive={true}
@@ -65,7 +65,7 @@ const StartsPage = () => {
               ))}
             </Pie>
             <Tooltip />
-            <Legend verticalAlign="bottom" height={36} />
+            <Legend verticalAlign="bottom" height={36} iconType="circle" />
           </PieChart>
         </ResponsiveContainer>
       </div>

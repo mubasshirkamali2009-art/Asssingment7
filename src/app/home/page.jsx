@@ -1,4 +1,4 @@
-"use client"; // Required for useState and useEffect
+"use client";
 import FriendCard from '@/components/shared/FriendCard';
 import React, { useState, useEffect } from 'react';
 import { IoAddCircleOutline } from "react-icons/io5";
@@ -12,7 +12,6 @@ const HomePage = () => {
     useEffect(() => {
         const fetchFriends = async () => {
             setLoading(true);
-            // Simulate network delay of 0.5s
             await new Promise(resolve => setTimeout(resolve, 500));
             setFriends(friendsData);
             setLoading(false);
@@ -22,39 +21,40 @@ const HomePage = () => {
     }, []);
 
     return (
-        <div className='bg-base-300 min-h-screen'>
-            <div className='mx-auto mt-30 content-center bg-base-300 items-center text-center'>
-                <h1 className='text-black bg-base-300 text-5xl py-5 text-center font-bold'>Friends to keep close in your life</h1>
-                <p className='text-center text-gray-500 py-5 '>
-                    Your personal shelf of meaningful connections. <br /> Browse, tend, and nurture the relationships that matter most.
+        <div className='bg-base-300 min-h-screen px-4 md:px-8'>
+            <div className='mx-auto pt-10 md:pt-20 text-center max-w-4xl'>
+                <h1 className='text-black text-3xl md:text-5xl lg:text-6xl py-5 font-bold leading-tight'>
+                    Friends to keep close in your life
+                </h1>
+                <p className='text-gray-500 py-5 text-sm md:text-base lg:text-lg'>
+                    Your personal shelf of meaningful connections. <br className="hidden md:block" /> Browse, tend, and nurture the relationships that matter most.
                 </p>
-                <button className='btn text-white bg-green-900 mx-auto content-center items-center'>
-                    <IoAddCircleOutline /> Add Friend
+                <button className='btn text-white bg-green-900 mx-auto flex items-center gap-2 hover:bg-green-800 transition-colors'>
+                    <IoAddCircleOutline className="text-xl" /> Add Friend
                 </button>
             </div>
 
-            <div className='flex gap-10 p-10 mx-auto my-20 justify-center'>
-                <div className='rounded-md bg-white text-center text-black shadow-2xl p-8 font-bold'>
-                    <h2>{friends.length}</h2>
-                    <p className='text-gray-500'>Total friends</p>
+            <div className='grid grid-cols-2 md:grid-cols-4 gap-4 lg:gap-8 p-5 md:p-10 mx-auto my-10 max-w-6xl'>
+                <div className='rounded-xl bg-white text-center text-black shadow-lg p-4 md:p-8 font-bold'>
+                    <h2 className="text-xl md:text-2xl">{friends.length}</h2>
+                    <p className='text-gray-500 text-xs md:text-sm font-normal'>Total friends</p>
                 </div>
-                <div className='rounded-md bg-white text-center text-black shadow-2xl p-8 font-bold '>
-                    <h2>{friends.filter(f => f.status === 'on-track').length}</h2>
-                    <p className='text-gray-500'>On Track</p>
+                <div className='rounded-xl bg-white text-center text-black shadow-lg p-4 md:p-8 font-bold'>
+                    <h2 className="text-xl md:text-2xl">{friends.filter(f => f.status === 'on-track').length}</h2>
+                    <p className='text-gray-500 text-xs md:text-sm font-normal'>On Track</p>
                 </div>
-                <div className='rounded-md bg-white text-center text-black shadow-2xl p-8 font-bold'>
-                    <h2>{friends.filter(f => f.status === 'overdue').length}</h2>
-                    <p className='text-gray-500'>Need Attention</p>
+                <div className='rounded-xl bg-white text-center text-black shadow-lg p-4 md:p-8 font-bold'>
+                    <h2 className="text-xl md:text-2xl">{friends.filter(f => f.status === 'overdue').length}</h2>
+                    <p className='text-gray-500 text-xs md:text-sm font-normal'>Need Attention</p>
                 </div>
-                <div className='rounded-md bg-white text-center text-black shadow-2xl p-8 font-bold'>
-                    <h2>10</h2>
-                    <p className='text-gray-500'>Interactions This Month</p>
+                <div className='rounded-xl bg-white text-center text-black shadow-lg p-4 md:p-8 font-bold'>
+                    <h2 className="text-xl md:text-2xl">10</h2>
+                    <p className='text-gray-500 text-xs md:text-sm font-normal'>Interactions</p>
                 </div>
             </div>
 
-            <div>
+            <div className="pb-20">
                 {loading ? (
-                    /* The Spinner logic from your Timeline page */
                     <div className="flex flex-col justify-center items-center py-20 gap-4">
                         <div className="relative w-16 h-16">
                             <div className="absolute inset-0 rounded-full border-4 border-gray-100"></div>

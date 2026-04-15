@@ -1,8 +1,8 @@
-"use client"; 
-import React, { use, useState, useEffect } from 'react'; // Added useState, useEffect
+"use client";
+import React, { use, useState, useEffect } from 'react';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import friendsData from "../../../friends.json"; // Renamed to avoid state conflict
+import friendsData from "../../../friends.json";
 import { HiMiniBellSnooze } from "react-icons/hi2";
 import { AiFillDelete } from "react-icons/ai";
 import { FaBoxArchive, FaVideo } from "react-icons/fa6";
@@ -29,14 +29,11 @@ const FriendDetailPage = ({ params }) => {
   useEffect(() => {
     const fetchFriend = async () => {
       setLoading(true);
-      // Force minimum 0.5s delay
       await new Promise(resolve => setTimeout(resolve, 500));
-      
       const foundFriend = friendsData.find((f) => String(f.id) === String(id));
       setFriend(foundFriend);
       setLoading(false);
     };
-
     fetchFriend();
   }, [id]);
 
@@ -55,7 +52,6 @@ const FriendDetailPage = ({ params }) => {
     toast.success(`${type} with ${friend.name}!`);
   };
 
-  // Loading State with your specific Spinner
   if (loading) {
     return (
       <div className="min-h-screen bg-base-300 flex flex-col justify-center items-center gap-4">
@@ -72,77 +68,77 @@ const FriendDetailPage = ({ params }) => {
   if (!friend) return <div className="p-6 text-red-500 bg-base-300 min-h-screen">Friend not found.</div>;
 
   return (
-    <div className="py-20 flex gap-6 bg-base-300 justify-center min-h-screen">
-      <div id="laft-column" className="w-[400px] gap-10 ">
-        <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-5 flex flex-col items-center text-center gap-3 hover:shadow-md transition-shadow duration-200">
+    <div className="py-10 md:py-20 px-4 flex flex-col lg:flex-row gap-6 bg-base-300 items-center lg:items-start lg:justify-center min-h-screen">
+      <div id="left-column" className="w-full max-w-md lg:w-[400px] space-y-5">
+        <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 flex flex-col items-center text-center gap-4 hover:shadow-md transition-shadow duration-200">
           <div className="avatar">
-            <div className="w-20 rounded-full ring ring-gray-100 ring-offset-2">
+            <div className="w-20 md:w-24 rounded-full ring ring-gray-100 ring-offset-2">
               <img src={friend.picture} alt={friend.name} />
             </div>
           </div>
 
           <div>
-            <h2 className="text-base font-semibold text-gray-800">{friend.name}</h2>
+            <h2 className="text-lg font-semibold text-gray-800">{friend.name}</h2>
           </div>
-          <span className={`text-xs font-semibold px-3 py-1 rounded-full ${statusStyles[friend.status]}`}>
+          <span className={`text-xs font-semibold px-4 py-1.5 rounded-full ${statusStyles[friend.status]}`}>
             {statusLabel[friend.status]}
           </span>
-          <div className="flex flex-wrap justify-center gap-1.5">
+          <div className="flex flex-wrap justify-center gap-2">
             {friend.tags.map((tag) => (
               <span
                 key={tag}
-                className="bg-green-50 text-green-700 text-xs font-medium px-2.5 py-0.5 rounded-full border border-green-100 uppercase tracking-wide"
+                className="bg-green-50 text-green-700 text-xs font-medium px-3 py-1 rounded-full border border-green-100 uppercase tracking-wide"
               >
                 {tag}
               </span>
             ))}
           </div>
-          <p className="text-gray-500 text-s ">{friend.bio}</p>
-          <p className="text-gray-500 text-xs">{friend.email}</p>
+          <p className="text-gray-500 text-sm md:text-base leading-relaxed">{friend.bio}</p>
+          <p className="text-gray-500 text-xs md:text-sm italic">{friend.email}</p>
         </div>
 
-        <div className="flex flex-col gap-5 my-5">
-          <button className="btn px-15 py-3"><HiMiniBellSnooze />Snooze 2 weeks</button>
-          <button className="btn px-15 py-3"><FaBoxArchive />Archive</button>
-          <button className="btn px-15 py-3 text-red-500"><AiFillDelete />Delete</button>
+        <div className="grid grid-cols-1 sm:grid-cols-3 lg:flex lg:flex-col gap-3">
+          <button className="btn w-full py-3 flex items-center justify-center gap-2"><HiMiniBellSnooze />Snooze</button>
+          <button className="btn w-full py-3 flex items-center justify-center gap-2"><FaBoxArchive />Archive</button>
+          <button className="btn w-full py-3 text-red-500 flex items-center justify-center gap-2"><AiFillDelete />Delete</button>
         </div>
       </div>
 
-      <div id="right-coloumn" className="space-y-14">
-        <div id="start-3cards" className="flex gap-5 ">
-          <div className='rounded-md bg-white text-center text-black shadow-2xl p-8 font-bold w-[240px]'>
-            <h2>{friend.days_since_contact}</h2>
-            <p className='text-gray-500'>Days Since Contact</p>
+      <div id="right-column" className="w-full max-w-3xl space-y-6 lg:space-y-14">
+        <div id="start-3cards" className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+          <div className='rounded-xl bg-white text-center text-black shadow-lg p-6 md:p-8 font-bold'>
+            <h2 className="text-xl md:text-2xl">{friend.days_since_contact}</h2>
+            <p className='text-gray-500 text-sm font-medium'>Days Since Contact</p>
           </div>
-          <div className='rounded-md bg-white text-center text-black shadow-2xl p-8 w-[240px] font-bold'>
-            <h2>{friend.goal}</h2>
-            <p className='text-gray-500'>Goal(Days)</p>
+          <div className='rounded-xl bg-white text-center text-black shadow-lg p-6 md:p-8 font-bold'>
+            <h2 className="text-xl md:text-2xl">{friend.goal}</h2>
+            <p className='text-gray-500 text-sm font-medium'>Goal(Days)</p>
           </div>
-          <div className='rounded-md bg-white text-center text-black shadow-2xl p-8 w-[240px] font-bold'>
-            <h2>{friend.next_due_date}</h2>
-            <p className='text-gray-500'>Next Due</p>
+          <div className='rounded-xl bg-white text-center text-black shadow-lg p-6 md:p-8 font-bold'>
+            <h2 className="text-lg md:text-xl truncate">{friend.next_due_date}</h2>
+            <p className='text-gray-500 text-sm font-medium'>Next Due</p>
           </div>
         </div>
 
-        <div className="bg-white p-4 rounded-xl">
-          <div className="flex justify-between">
-            <p className="text-green-800">Relationship Goal</p>
-            <button className="btn btn--outline">Edit</button>
+        <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
+          <div className="flex justify-between items-center mb-4">
+            <p className="text-green-800 font-semibold">Relationship Goal</p>
+            <button className="btn btn-sm btn-outline">Edit</button>
           </div>
-          Connect every <span className="font-extrabold">{friend.goal}</span>
+          <p className="text-gray-700">Connect every <span className="font-extrabold text-lg">{friend.goal}</span> days</p>
         </div>
 
-        <div className="bg-white space-y-5 p-5 rounded-xl">
-          <p className="text-green-800">Quick Check-In</p>
-          <div className="flex gap-9 justify-center">
-            <button onClick={() => addToTimeline("Call")} className="btn btn-base px-14 py-5">
-              <IoCallOutline /> Call
+        <div className="bg-white space-y-6 p-6 md:p-8 rounded-2xl shadow-sm border border-gray-100">
+          <p className="text-green-800 font-semibold text-center sm:text-left">Quick Check-In</p>
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            <button onClick={() => addToTimeline("Call")} className="btn btn-ghost bg-gray-50 border-gray-200 hover:bg-blue-50 py-4 flex flex-col sm:flex-row items-center gap-2 h-auto">
+              <IoCallOutline className="text-xl text-blue-600" /> Call
             </button>
-            <button onClick={() => addToTimeline("Text")} className="btn btn-base px-14 py-5">
-              <IoIosText /> Text
+            <button onClick={() => addToTimeline("Text")} className="btn btn-ghost bg-gray-50 border-gray-200 hover:bg-green-50 py-4 flex flex-col sm:flex-row items-center gap-2 h-auto">
+              <IoIosText className="text-xl text-green-600" /> Text
             </button>
-            <button onClick={() => addToTimeline("Video")} className="btn btn-base px-14 py-5">
-              <FaVideo /> Video
+            <button onClick={() => addToTimeline("Video")} className="btn btn-ghost bg-gray-50 border-gray-200 hover:bg-purple-50 py-4 flex flex-col sm:flex-row items-center gap-2 h-auto">
+              <FaVideo className="text-xl text-purple-600" /> Video
             </button>
           </div>
         </div>
