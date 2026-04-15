@@ -1,15 +1,21 @@
 "use client";
 import React, { useState, useEffect } from 'react';
 import { Legend, Pie, PieChart, Tooltip, Cell, ResponsiveContainer } from 'recharts';
-
+import Link from 'next/link';
+import { FcBarChart } from "react-icons/fc";
 const StartsPage = () => {
   const [chartData, setChartData] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [hasData, setHasData] = useState(false);
 
   useEffect(() => {
     const loadTimelineData = () => {
-      setLoading(true);
       const savedTimeline = JSON.parse(localStorage.getItem("timeline") || "[]");
+      
+      if (savedTimeline.length === 0) {
+        setHasData(false);
+        return;
+      }
+
       const counts = savedTimeline.reduce((acc, item) => {
         acc[item.action] = (acc[item.action] || 0) + 1;
         return acc;
@@ -22,24 +28,11 @@ const StartsPage = () => {
       ];
 
       setChartData(formattedData);
-      setTimeout(() => setLoading(false), 500);
+      setHasData(formattedData.some(d => d.value > 0));
     };
 
     loadTimelineData();
   }, []);
-
-  if (loading) {
-    return (
-      <div className="min-h-screen bg-base-300 flex flex-col justify-center items-center gap-4">
-        <div className="relative w-16 h-16">
-          <div className="absolute inset-0 rounded-full border-4 border-gray-100"></div>
-          <div className="absolute inset-0 rounded-full border-4 border-transparent border-t-blue-400 border-r-purple-400 animate-spin"></div>
-          <div className="absolute inset-2 rounded-full border-4 border-transparent border-t-pink-400 border-r-blue-400 animate-spin" style={{ animationDirection: "reverse", animationDuration: "0.8s" }}></div>
-        </div>
-        <p className="text-gray-400 text-sm animate-pulse">Loading Analytics...</p>
-      </div>
-    );
-  }
 
   return (
     <div className='flex flex-col items-center justify-center space-y-6 md:space-y-10 p-5 md:p-10 min-h-screen bg-base-300'>
@@ -48,27 +41,40 @@ const StartsPage = () => {
         <p className='text-gray-500 mt-2 text-sm md:text-base'>By Interaction Type</p>
       </div>
 
-      <div className="w-full max-w-[500px] h-[300px] sm:h-[350px] md:h-[400px]">
-        <ResponsiveContainer width="100%" height="100%">
-          <PieChart>
-            <Pie
-              data={chartData}
-              innerRadius="65%"
-              outerRadius="85%"
-              paddingAngle={5}
-              dataKey="value"
-              isAnimationActive={true}
-              label={({ name, value }) => value > 0 ? `${name}: ${value}` : ''}
-            >
-              {chartData.map((entry, index) => (
-                <Cell key={`cell-${index}`} fill={entry.fill} />
-              ))}
-            </Pie>
-            <Tooltip />
-            <Legend verticalAlign="bottom" height={36} iconType="circle" />
-          </PieChart>
-        </ResponsiveContainer>
-      </div>
+      {!hasData ? (
+        <div className="bg-white rounded-2xl p-10 shadow-sm border border-gray-100 text-center max-w-md w-full">
+          <div className="text-5xl mb-4 mx-auto flex justify-center">
+            <FcBarChart />
+          </div>
+          <h2 className="text-xl font-bold text-gray-800">History is empty</h2>
+          <p className="text-gray-500 mt-2 mb-6">No analytics to show yet. Start interacting with your friends to see the data here!</p>
+          <Link href="/" className="btn btn-primary w-full">
+            Go to Home
+          </Link>
+        </div>
+      ) : (
+        <div className="w-full max-w-[500px] h-[300px] sm:h-[350px] md:h-[400px]">
+          <ResponsiveContainer width="100%" height="100%">
+            <PieChart>
+              <Pie
+                data={chartData}
+                innerRadius="65%"
+                outerRadius="85%"
+                paddingAngle={5}
+                dataKey="value"
+                isAnimationActive={true}
+                label={({ name, value }) => value > 0 ? `${name}: ${value}` : ''}
+              >
+                {chartData.map((entry, index) => (
+                  <Cell key={`cell-${index}`} fill={entry.fill} />
+                ))}
+              </Pie>
+              <Tooltip />
+              <Legend verticalAlign="bottom" height={36} iconType="circle" />
+            </PieChart>
+          </ResponsiveContainer>
+        </div>
+      )}
     </div>
   );
 };

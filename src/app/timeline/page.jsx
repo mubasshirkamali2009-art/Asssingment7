@@ -4,6 +4,7 @@ import callimg from "../../assets/img/call.png"
 import textimg from "../../assets/img/text.png"
 import videoimg from "../../assets/img/video.png"
 import Image from "next/image";
+import { IoNotificationsOffSharp } from "react-icons/io5";
 
 const icons = {
   Call: <Image src={callimg} alt="call history" />,
@@ -85,6 +86,9 @@ const TimelinePage = () => {
           </div>
         ) : visibleActivity.length === 0 ? (
           <div className="bg-white rounded-2xl p-8 md:p-12 text-center shadow-sm">
+            <div className="text-5xl mb-4 mx-auto flex justify-center">
+              <IoNotificationsOffSharp />
+            </div>
             <p className="text-gray-400 text-lg">No activity yet</p>
             <p className="text-gray-300 text-sm mt-2">Go check in with a friend!</p>
           </div>
