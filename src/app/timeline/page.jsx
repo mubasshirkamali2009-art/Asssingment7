@@ -22,11 +22,14 @@ const filterOptions = ["All", "Call", "Text", "Video"];
 const TimelinePage = () => {
   const [allActivity, setAllActivity] = useState([]);
   const [selected, setSelected] = useState("All");
+    const [loading, setLoading] = useState(true); 
 
   useEffect(() => {
     const load = () => {
+              setLoading(true); 
       const saved = JSON.parse(localStorage.getItem("timeline") || "[]");
       setAllActivity(saved);
+           setTimeout(() => setLoading(false), 500);
     };
 
     load();
@@ -38,6 +41,10 @@ const TimelinePage = () => {
   const visibleActivity = selected === "All"
     ? allActivity
     : allActivity.filter((item) => item.action === selected);
+const handleClearhistory =()=>{
+    localStorage.clear()
+    setAllActivity([]);
+}
 
   return (
     <div className="min-h-screen bg-base-300 py-20 px-6">
@@ -64,7 +71,17 @@ const TimelinePage = () => {
           </svg>
         </div>
 
-        {visibleActivity.length === 0 ? (
+        {
+        loading ? (
+  <div className="flex flex-col justify-center items-center py-20 gap-4">
+    <div className="relative w-16 h-16">
+      <div className="absolute inset-0 rounded-full border-4 border-gray-100"></div>
+      <div className="absolute inset-0 rounded-full border-4 border-transparent border-t-blue-400 border-r-purple-400 animate-spin"></div>
+      <div className="absolute inset-2 rounded-full border-4 border-transparent border-t-pink-400 border-r-blue-400 animate-spin" style={{ animationDirection: "reverse", animationDuration: "0.8s" }}></div>
+    </div>
+    <p className="text-gray-400 text-sm animate-pulse">Loading timeline...</p>
+  </div> )
+       : visibleActivity.length === 0 ? (
           <div className="bg-white rounded-2xl p-12 text-center shadow-sm">
             <p className="text-gray-400 text-lg">No activity yet</p>
             <p className="text-gray-300 text-sm mt-2">Go check in with a friend!</p>
@@ -93,10 +110,12 @@ const TimelinePage = () => {
                   {item.action}
                 </span>
               </div>
-            ))}
-          </div>
+            ))} 
+            <button onClick={handleClearhistory} className="btn btn-warning">Clear history</button>
+          </div> 
+         
         )}
-
+  
       </div>
     </div>
   );

@@ -17,32 +17,31 @@ const Navbar = () => {
       : 'text-gray-600 hover:text-teal-600 hover:font-bold';
 
   return (
-    <div>
-      <div className="navbar bg-base-100 shadow-sm">
-        <div className="flex-1">
-          <Image src={logoimg} alt="keeplogo"  />
-        </div>
-        <div className="flex-none">
-          <ul className="menu menu-horizontal px-1 gap-5">
-            <li>
-              <Link href="/home" className={linkClass('/home')}>
-                <IoHomeOutline /> Home
-              </Link>
-            </li>
-            <li>
-              <Link href="/timeline" className={linkClass('/timeline')}>
-                <FaHistory /> Timeline
-              </Link>
-            </li>
-            <li>
-              <Link href="/starts" className={linkClass('/starts')}>
-                <MdOutlineQueryStats /> Stats
-              </Link>
-            </li>
-          </ul>
-        </div>
+    /* Removed the extra <div> wrapper or made it the sticky element */
+    <nav className="navbar bg-base-100 shadow-sm sticky top-0 z-50 w-full">
+      <div className="flex-1">
+        <Image src={logoimg} alt="keeplogo" />
       </div>
-    </div>
+      <div className="flex-none">
+        <ul className="menu menu-horizontal px-1 gap-5">
+          <li>
+            <Link href="/home" className={linkClass('/home')}>
+              <IoHomeOutline /> Home
+            </Link>
+          </li>
+          <li>
+            <Link href="/timeline" className={linkClass('/timeline')}>
+              <FaHistory /> Timeline
+            </Link>
+          </li>
+          <li>
+            <Link href="/starts" className={linkClass('/starts')}>
+              <MdOutlineQueryStats /> Stats
+            </Link>
+          </li>
+        </ul>
+      </div> 
+    </nav>
   );
 };
 
